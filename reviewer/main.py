@@ -66,7 +66,7 @@ Code diff:
     })
 
     response = bedrock.invoke_model(
-        modelId="us.anthropic.claude-sonnet-4-6",
+        modelId="anthropic.claude-sonnet-4-6",
         body=body
     )
 
