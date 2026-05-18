@@ -55,18 +55,23 @@ Code diff:
 {code_diff}"""
 
     body = json.dumps({
-        "anthropic_version": "bedrock-2023-05-31",
-        "max_tokens": 1024,
-        "messages": [
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
-    })
+    "anthropic_version": "bedrock-2023-05-31",
+    "max_tokens": 1024,
+    "messages": [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": prompt
+                }
+            ]
+        }
+    ]
+})
 
     response = bedrock.invoke_model(
-        modelId="anthropic.claude-sonnet-4-6",
+        modelId="anthropic.claude-3-sonnet-20240229-v1:0",
         body=body
     )
 
