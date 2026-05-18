@@ -34,9 +34,19 @@ async def github_webhook(request: Request):
         print(f"Raw body length: {len(body)}")
         if not body:
             return {"message": "Empty body"}
-        payload = json.loads(body)
+        
+        # Try JSON first, then URL decode
+        try:
+            payload = json.loads(body)
+        except:
+            from urllib.parse import unquote_plus
+            decoded = unquote_plus(body.decode("utf-8"))
+            if decoded.startswith("payload="):
+                decoded = decoded[8:]
+            payload = json.loads(decoded)
+            
     except Exception as e:
-        print(f"JSON parse error: {e}")
+        print(f"Parse error: {e}")
         return {"message": "Invalid payload"}
 
     print(f"Action received: {payload.get('action')}")
