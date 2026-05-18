@@ -2,6 +2,7 @@ import sqlite3
 
 # BAD: password stored as plain text
 ADMIN_PASSWORD = "admin123"
+admin_token = "secret123"
 
 def login(username, password):
     # BAD: no input validation
