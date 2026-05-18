@@ -4,7 +4,7 @@ import sqlite3
 ADMIN_PASSWORD = "admin123"
 admin_token = "secret123"
 
-
+log_password = True
 
 # another bad practice
 debug_mode = True

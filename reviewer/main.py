@@ -20,7 +20,10 @@ bedrock = boto3.client(
 
 @app.post("/webhook")
 async def github_webhook(request: Request):
-    payload = await request.json()
+    try:
+        payload = await request.json()
+    except Exception:
+        return {"message": "Invalid payload"}
 
     # Only handle PR opened or updated
     if payload.get("action") not in ["opened", "synchronize"]:
