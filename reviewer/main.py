@@ -27,7 +27,7 @@ async def github_webhook(request: Request):
         if not body:
             return {"message": "Empty body"}
         
-        # Try JSON first, then URL decode
+        # Try JSON first, then URL decod
         try:
             payload = json.loads(body)
         except:
