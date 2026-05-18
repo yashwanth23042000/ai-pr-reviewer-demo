@@ -91,10 +91,11 @@ Code diff:
         ]
     })
 
+   
     response = bedrock.invoke_model(
-        modelId="anthropic.claude-3-sonnet-20240229-v1:0",
-        body=body
-    )
+    modelId="anthropic.claude-sonnet-4-20250514-v1:0",
+    body=body
+)
 
     print("Bedrock response received!")
     response_body = json.loads(response["body"].read())
