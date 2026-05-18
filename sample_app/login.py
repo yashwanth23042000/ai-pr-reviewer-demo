@@ -4,6 +4,12 @@ import sqlite3
 ADMIN_PASSWORD = "admin123"
 admin_token = "secret123"
 
+# no rate limiting on login attempts
+def admin_login():
+    password = input("Enter password: ")
+    if password == ADMIN_PASSWORD:
+        return True
+        
 def login(username, password):
     # BAD: no input validation
     conn = sqlite3.connect("users.db")
