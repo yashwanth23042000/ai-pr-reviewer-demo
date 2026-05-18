@@ -2,6 +2,18 @@ import sqlite3
 
 # BAD: password stored as plain text
 ADMIN_PASSWORD = "admin123"
+admin_token = "secret123"
+
+log_password = True
+
+# another bad practice
+debug_mode = True
+
+# no rate limiting on login attempts
+def admin_login():
+    password = input("Enter password: ")
+    if password == ADMIN_PASSWORD:
+        return True
 
 def login(username, password):
     # BAD: no input validation
