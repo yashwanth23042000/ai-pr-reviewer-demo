@@ -18,11 +18,21 @@ bedrock = boto3.client(
     region_name="us-east-1"
 )
 
+# @app.post("/webhook")
+# async def github_webhook(request: Request):
+#     try:
+#         payload = await request.json()
+#     except Exception:
+#         return {"message": "Invalid payload"}
+
+#     print(f"Action received: {payload.get('action')}")
+
 @app.post("/webhook")
 async def github_webhook(request: Request):
     try:
         payload = await request.json()
-    except Exception:
+    except Exception as e:
+        print(f"JSON parse error: {e}")
         return {"message": "Invalid payload"}
 
     print(f"Action received: {payload.get('action')}")
