@@ -11,6 +11,7 @@ load_dotenv()
 app = FastAPI()
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+print(f"GITHUB TOKEN LOADED: {GITHUB_TOKEN}")  # add this line
 
 # AWS Bedrock client
 bedrock = boto3.client(
@@ -73,8 +74,9 @@ Code diff:
     review_comment = response_body["content"][0]["text"]
 
     # Step 3 — Post comment back to GitHub PR
+    # Step 3 — Post comment back to GitHub PR
     async with httpx.AsyncClient() as client:
-        await client.post(
+        github_response = await client.post(
             f"https://api.github.com/repos/{repo_full_name}/issues/{pr_number}/comments",
             json={"body": review_comment},
             headers={
@@ -82,5 +84,7 @@ Code diff:
                 "Accept": "application/vnd.github.v3+json"
             }
         )
+        print(f"GitHub response status: {github_response.status_code}")
+        print(f"GitHub response body: {github_response.text}")
 
     return {"message": "Review posted successfully"}
