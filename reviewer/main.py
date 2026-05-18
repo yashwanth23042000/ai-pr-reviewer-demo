@@ -25,6 +25,8 @@ async def github_webhook(request: Request):
     except Exception:
         return {"message": "Invalid payload"}
 
+    print(f"Action received: {payload.get('action')}")
+
     if payload.get("action") not in ["opened", "synchronize"]:
         return {"message": "Ignored"}
 
